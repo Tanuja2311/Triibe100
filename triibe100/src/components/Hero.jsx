@@ -1,4 +1,13 @@
 import { CATEGORIES } from '../data/founders'
+import { FoodIcon, WaterIcon, ShelterIcon, HealthIcon, EducationIcon } from './icons/CategoryIcons'
+
+const CATEGORY_ICONS = {
+  Food: FoodIcon,
+  Water: WaterIcon,
+  Shelter: ShelterIcon,
+  Health: HealthIcon,
+  Education: EducationIcon,
+}
 
 export default function Hero({ activeCategory, onCategoryToggle }) {
   return (
@@ -20,6 +29,8 @@ export default function Hero({ activeCategory, onCategoryToggle }) {
         <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
           {CATEGORIES.map(cat => {
             const isActive = activeCategory === cat.name
+            const Icon = CATEGORY_ICONS[cat.name]
+            const iconColor = isActive ? 'white' : '#1B3A2D'
             return (
               <button
                 key={cat.name}
@@ -27,10 +38,10 @@ export default function Hero({ activeCategory, onCategoryToggle }) {
                 className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium border transition-all ${
                   isActive
                     ? 'bg-[#1B3A2D] text-white border-[#1B3A2D] shadow-sm'
-                    : 'bg-white text-gray-600 border-gray-200 hover:border-[#1B3A2D] hover:text-[#1B3A2D]'
+                    : 'bg-white text-[#1B3A2D] border-[#e5e7eb] hover:border-[#1B3A2D]'
                 }`}
               >
-                <span className="text-base leading-none">{cat.emoji}</span>
+                <Icon size={16} color={iconColor} />
                 {cat.name}
               </button>
             )

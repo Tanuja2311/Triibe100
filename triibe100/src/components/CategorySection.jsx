@@ -1,48 +1,64 @@
 import FounderCard from './FounderCard'
+import { FoodIcon, WaterIcon, ShelterIcon, HealthIcon, EducationIcon } from './icons/CategoryIcons'
+
+const CATEGORY_ICONS = {
+  Food: FoodIcon,
+  Water: WaterIcon,
+  Shelter: ShelterIcon,
+  Health: HealthIcon,
+  Education: EducationIcon,
+}
 
 export default function CategorySection({ category, founders, flip, index }) {
-  return (
-    <section
-      id={category.name.toLowerCase()}
-      className={`py-16 px-6 ${flip ? 'bg-gray-50' : 'bg-white'}`}
+  const Icon = CATEGORY_ICONS[category.name]
+  const categoryCard = (
+    <div
+      className="relative w-72 flex-shrink-0 flex flex-col justify-between p-8 overflow-hidden"
+      style={{ backgroundColor: '#1B3A2D' }}
     >
-      <div className="max-w-7xl mx-auto">
+      <span className="pointer-events-none select-none absolute top-1/2 -translate-y-1/2 right-0 translate-x-1/4 text-[180px] font-black leading-none text-white/10">
+        {String(index + 1).padStart(2, '0')}
+      </span>
 
-        {/* Feature card — content flips left / right per section */}
-        <div
-          className="rounded-2xl px-10 py-12 md:px-16 md:py-14 mb-10 relative overflow-hidden"
-          style={{ backgroundColor: '#1B3A2D' }}
-        >
-          <div
-            className={`relative z-10 text-white flex flex-col max-w-sm ${
-              flip ? 'items-end ml-auto text-right' : 'items-start'
-            }`}
-          >
-            <span className="text-5xl leading-none">{category.emoji}</span>
-            <h2 className="text-3xl font-bold mt-5">{category.name}</h2>
-            <p className="mt-3 text-sm text-white/60 leading-relaxed">
-              {category.description}
-            </p>
-            <button className="mt-8 text-sm font-semibold tracking-wider text-white hover:text-white/70 transition-colors">
-              LEARN MORE ↗
-            </button>
-          </div>
-          <span
-            className={`pointer-events-none select-none absolute top-1/2 -translate-y-1/2 text-[220px] font-black leading-none text-white/[0.04] ${
-              flip ? 'left-8' : 'right-8'
-            }`}
-          >
-            {String(index + 1).padStart(2, '0')}
-          </span>
+      <div className="relative z-10 flex flex-col gap-3">
+        <Icon size={32} />
+        <h2 className="text-2xl font-bold text-white">{category.name}</h2>
+        <p className="text-xs text-white/60 leading-relaxed">{category.description}</p>
+      </div>
+
+      <a
+        href={`#${category.name.toLowerCase()}`}
+        className="relative z-10 text-xs font-semibold tracking-widest text-white hover:text-white/70 transition-colors"
+      >
+        LEARN MORE →
+      </a>
+    </div>
+  )
+
+  const founderGrid = (
+    <div className="flex-1 grid grid-cols-4 gap-3 p-4 bg-white">
+      {founders.map(founder => (
+        <FounderCard key={founder.id} founder={founder} />
+      ))}
+    </div>
+  )
+
+  return (
+    <section id={category.name.toLowerCase()} className="py-4">
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="flex overflow-hidden rounded-2xl border border-gray-100 shadow-sm">
+          {flip ? (
+            <>
+              {founderGrid}
+              {categoryCard}
+            </>
+          ) : (
+            <>
+              {categoryCard}
+              {founderGrid}
+            </>
+          )}
         </div>
-
-        {/* 4-column founder grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-          {founders.map(founder => (
-            <FounderCard key={founder.id} founder={founder} />
-          ))}
-        </div>
-
       </div>
     </section>
   )

@@ -4,7 +4,7 @@ import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Intro from './components/Intro'
 import CategorySection from './components/CategorySection'
-import Footer from './components/Footer'
+import Footer, { FooterCTA } from './components/Footer'
 
 export default function App() {
   const [activeCategory, setActiveCategory] = useState(null)
@@ -34,6 +34,7 @@ export default function App() {
           />
         )
       })}
+      <FooterCTA />
       <Footer />
     </div>
   )

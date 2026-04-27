@@ -6,7 +6,11 @@
       "Bash(npx tailwindcss *)",
       "Bash(./node_modules/.bin/tailwindcss init *)",
       "Bash(npm run *)",
-      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173)"
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173)",
+      "Bash(node -e \"require\\('lucide-react'\\)\")",
+      "Bash(node -e \"const l = require\\('lucide-react'\\); const keys = Object.keys\\(l\\); console.log\\(keys.filter\\(k => /linkedin|twitter|instagram|x$/i.test\\(k\\)\\).join\\(', '\\)\\)\")",
+      "Bash(node -e \"const l = require\\('lucide-react'\\); const keys = Object.keys\\(l\\); console.log\\(keys.filter\\(k => /^\\(Linked|Linked|Linked|Insta|insta\\)/i.test\\(k\\)\\).slice\\(0,10\\).join\\(', '\\)\\); console.log\\(keys.filter\\(k => /^Linked/i.test\\(k\\)\\).slice\\(0,5\\).join\\(', '\\)\\); console.log\\(keys.filter\\(k => k === 'LinkedinIcon' || k === 'LinkedInIcon' || k === 'Linkedin' || k === 'LinkedIn'\\).join\\(', '\\)\\)\")",
+      "Bash(node -e \"const l = require\\('lucide-react'\\); Object.keys\\(l\\).filter\\(k => !k.startsWith\\('Lucide'\\)\\).sort\\(\\).forEach\\(k => process.stdout.write\\(k + ' '\\)\\)\")"
     ]
   }
 }
