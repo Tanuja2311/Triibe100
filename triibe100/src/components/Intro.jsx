@@ -1,11 +1,11 @@
 export default function Intro() {
   return (
-    <section className="py-16 px-6 bg-gray-50">
-      <div className="max-w-4xl mx-auto text-center">
+    <section style={{ padding: '80px 0' }} className="bg-gray-50 px-6">
+      <div className="max-w-3xl mx-auto text-center">
         <span className="text-xs font-semibold tracking-widest text-gray-400 uppercase">
           TRIIBE I00
         </span>
-        <h2 className="mt-4 text-3xl font-bold text-gray-900 leading-snug max-w-2xl mx-auto">
+        <h2 className="mt-4 text-3xl font-bold text-gray-900 leading-snug">
           Next-gen for next-gen. A definitive list of founders building with
           humility across the five commons.
         </h2>

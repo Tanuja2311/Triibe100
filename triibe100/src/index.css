@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
 /* iOS Safari does not support background-attachment: fixed — fall back to scroll */
 @media (max-width: 768px) {
   .parallax-section {

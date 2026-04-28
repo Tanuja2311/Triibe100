@@ -1,35 +1,99 @@
+import { useState } from 'react'
+
 const PersonIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="12" cy="8" r="4"/>
-    <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="#9ca3af"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    width="40"
+    height="40"
+    style={{ opacity: 0.3 }}
+  >
+    <circle cx="12" cy="8" r="4" />
+    <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
   </svg>
 )
 
 export default function FounderCard({ founder }) {
+  const [hovered, setHovered] = useState(false)
+
   return (
     <div
-      className="rounded-xl overflow-hidden hover:border-[#1B3A2D] transition-all duration-200 cursor-pointer"
-      style={{ border: '0.5px solid #e5e7eb', backgroundColor: 'rgba(255,255,255,0.95)' }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        background: hovered ? 'white' : 'rgba(255,255,255,0.93)',
+        border: hovered ? '0.5px solid #1B3A2D' : '0.5px solid rgba(255,255,255,0.4)',
+        borderRadius: '10px',
+        overflow: 'hidden',
+        transform: hovered ? 'scale(1.02)' : 'scale(1)',
+        transition: 'all 200ms',
+        cursor: 'pointer',
+      }}
     >
-      {/* Banner — swap this div for <img src={founder.photo} alt={founder.name} className="w-full h-full object-cover object-top" /> when photos are ready */}
-      <div className="relative h-40 flex items-center justify-center" style={{ backgroundColor: '#E8EFE8' }}>
+      <div
+        style={{
+          height: '120px',
+          backgroundColor: '#E8EFE8',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          position: 'relative',
+        }}
+      >
         <span
-          className="absolute top-0 left-0 text-[9px] leading-none"
-          style={{ color: 'rgba(27,58,45,0.5)', padding: '6px 8px' }}
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            fontSize: '9px',
+            color: 'rgba(27,58,45,0.45)',
+            padding: '6px 8px',
+            lineHeight: 1,
+          }}
         >
           #{String(founder.id).padStart(2, '0')}
+        </span>
+        <span
+          style={{
+            position: 'absolute',
+            top: '8px',
+            right: '8px',
+            background: '#1B3A2D',
+            color: 'white',
+            fontSize: '8px',
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+            padding: '3px 7px',
+            borderRadius: '99px',
+          }}
+        >
+          Coming Soon
         </span>
         <PersonIcon />
       </div>
 
-      {/* Body */}
-      <div style={{ padding: '8px 10px', backgroundColor: 'rgba(255,255,255,0.95)' }}>
-        <p className="text-[11px] font-medium text-gray-900 leading-tight truncate">
-          {founder.name}
-        </p>
-        <p className="text-[10px] text-gray-400 leading-tight truncate" style={{ marginTop: '2px' }}>
-          {founder.org}
-        </p>
+      <div style={{ padding: '8px 10px' }}>
+        <div
+          style={{
+            height: '10px',
+            background: '#e5e7eb',
+            borderRadius: '4px',
+            width: '70%',
+            marginBottom: '6px',
+          }}
+        />
+        <div
+          style={{
+            height: '8px',
+            background: '#f3f4f6',
+            borderRadius: '4px',
+            width: '50%',
+          }}
+        />
       </div>
     </div>
   )
