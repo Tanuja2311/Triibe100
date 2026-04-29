@@ -6,8 +6,16 @@ html {
   scroll-behavior: smooth;
 }
 
-/* iOS Safari does not support background-attachment: fixed — fall back to scroll */
+/* Zone backgrounds: fixed parallax on desktop, scroll on mobile (iOS Safari compat) */
+.zone-bg {
+  background-attachment: fixed;
+}
+
 @media (max-width: 768px) {
+  .zone-bg {
+    background-attachment: scroll;
+  }
+
   .parallax-section {
     background-attachment: scroll !important;
   }
