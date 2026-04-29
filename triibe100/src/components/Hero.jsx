@@ -16,18 +16,21 @@ export default function Hero() {
         className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage:
-            'radial-gradient(circle, rgba(255,255,255,0.35) 1px, transparent 1px)',
-          backgroundSize: '28px 28px',
+            'radial-gradient(circle, white 1px, transparent 1px)',
+          backgroundSize: '20px 20px',
           opacity: 0.04,
         }}
       />
 
       <div className="relative z-10 max-w-2xl mx-auto px-6">
-        <p className="text-xs tracking-widest uppercase mb-3" style={{ color: 'rgba(255,255,255,0.4)' }}>
+        <p
+          className="text-xs tracking-widest uppercase mb-3"
+          style={{ color: 'rgba(255,255,255,0.4)' }}
+        >
           TRIIBE I00 — Class of 2026
         </p>
 
-        <h1 className="text-5xl md:text-5xl font-bold text-white leading-tight" style={{ fontSize: 'clamp(2rem, 5vw, 3rem)' }}>
+        <h1 className="text-3xl md:text-5xl font-bold text-white leading-tight">
           Honoring{' '}
           <span style={{ color: 'rgba(255,255,255,0.3)' }}>100</span>
           {' '}next-gen nonprofit founders.
@@ -49,11 +52,18 @@ export default function Hero() {
               key={stat.label}
               className="flex flex-col items-center px-6"
               style={{
-                borderRight: i < STATS.length - 1 ? '1px solid rgba(255,255,255,0.15)' : 'none',
+                borderRight: i < STATS.length - 1
+                  ? '1px solid rgba(255,255,255,0.1)'
+                  : 'none',
               }}
             >
               <span className="text-xl font-bold text-white">{stat.value}</span>
-              <span className="text-xs mt-0.5" style={{ color: 'rgba(255,255,255,0.4)' }}>{stat.label}</span>
+              <span
+                className="text-xs uppercase tracking-widest mt-1"
+                style={{ color: 'rgba(255,255,255,0.3)' }}
+              >
+                {stat.label}
+              </span>
             </div>
           ))}
         </div>

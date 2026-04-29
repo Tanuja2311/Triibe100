@@ -11,7 +11,7 @@ const CARDS = [
   },
   {
     title: 'Fund our Work',
-    desc: 'Your donation helps founders build lasting impact in the communities they serve.',
+    desc: 'Your donation helps founders make an impact across the five commons.',
     button: 'Donate',
   },
 ]
@@ -20,24 +20,27 @@ export default function FooterCTA() {
   return (
     <section style={{ backgroundColor: '#1B3A2D', padding: '64px 0' }}>
       <div className="max-w-5xl mx-auto px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {CARDS.map(card => (
             <div
               key={card.title}
               className="flex flex-col"
-              style={{ border: '1px solid rgba(255,255,255,0.2)', padding: '40px 32px' }}
+              style={{
+                border: '1px solid rgba(255,255,255,0.15)',
+                padding: '40px 32px',
+              }}
             >
               <div className="flex-1">
-                <h3 className="text-2xl font-bold text-white">{card.title}</h3>
+                <h3 className="text-2xl font-bold text-white mb-4">{card.title}</h3>
                 <p
-                  className="text-sm leading-relaxed mt-4"
+                  className="text-sm leading-relaxed mb-8"
                   style={{ color: 'rgba(255,255,255,0.55)' }}
                 >
                   {card.desc}
                 </p>
               </div>
               <button
-                className="w-full mt-8 py-3 font-medium text-sm transition-opacity hover:opacity-90"
+                className="w-full py-3 text-sm font-medium transition-opacity hover:opacity-90"
                 style={{ background: 'white', color: '#1B3A2D' }}
               >
                 {card.button}

@@ -4,10 +4,10 @@ export default function Intro() {
       className="bg-white"
       style={{ padding: '64px 0', borderBottom: '0.5px solid #f3f4f6' }}
     >
-      <div className="max-w-4xl mx-auto px-8 grid md:grid-cols-2 gap-12 items-start">
+      <div className="max-w-5xl mx-auto px-8 grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
 
         <div>
-          <p className="text-xs tracking-widest uppercase text-green-800 mb-3">TRIIBE I00</p>
+          <p className="text-xs tracking-widest uppercase text-green-900 mb-3">TRIIBE I00</p>
           <h2 className="text-2xl font-bold text-gray-900 leading-snug">
             Next-gen for next-gen. A definitive list of founders building with humility.
           </h2>

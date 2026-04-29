@@ -6,17 +6,26 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Zone backgrounds: fixed parallax on desktop, scroll on mobile (iOS Safari compat) */
-.zone-bg {
-  background-attachment: fixed;
+/* Zone drift backgrounds: 150% wide on desktop, 200% on mobile */
+.zone-drift-bg {
+  background-size: 150% auto;
 }
 
 @media (max-width: 768px) {
-  .zone-bg {
-    background-attachment: scroll;
+  .zone-drift-bg {
+    background-size: 200% auto;
   }
+}
 
-  .parallax-section {
-    background-attachment: scroll !important;
+/* Founder grid: 5 cols desktop, 2 cols mobile */
+.founder-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 768px) {
+  .founder-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }

@@ -1,75 +1,82 @@
+import { useState } from 'react'
 import FounderCard from './FounderCard'
 
-export default function ZoneSection({ zone, founders, zoneRef, nextImage, blendOpacity }) {
+export default function ZoneSection({ zone, founders, driftX }) {
+  const [expandedId, setExpandedId] = useState(null)
+
   return (
-    <div
-      ref={zoneRef}
-      id={`zone-${zone.id}`}
-      className="relative"
-      style={{ minHeight: 'fit-content' }}
-    >
-      {/* Background layer 1: current zone image */}
+    <div id={`zone-${zone.id}`} style={{ position: 'relative' }}>
+
+      {/* Drifting background */}
       <div
-        className="absolute inset-0 zone-bg"
+        className="zone-drift-bg"
         style={{
+          position: 'absolute',
+          inset: 0,
           zIndex: 0,
           backgroundImage: `url(${zone.image})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      />
-
-      {/* Background layer 2: next zone image, fades in */}
-      <div
-        className="absolute inset-0 zone-bg"
-        style={{
-          zIndex: 1,
-          backgroundImage: `url(${nextImage})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          opacity: blendOpacity,
-          transition: 'opacity 0.3s ease',
+          backgroundPosition: driftX,
+          backgroundRepeat: 'no-repeat',
+          transition: 'background-position 0.1s linear',
+          willChange: 'background-position',
         }}
       />
 
       {/* Dark overlay */}
       <div
-        className="absolute inset-0"
-        style={{ zIndex: 2, background: 'rgba(10, 20, 15, 0.58)' }}
+        style={{
+          position: 'absolute',
+          inset: 0,
+          zIndex: 1,
+          background: 'rgba(10, 20, 15, 0.60)',
+        }}
       />
 
       {/* Content */}
       <div
-        className="relative max-w-6xl mx-auto px-8 py-12"
-        style={{ zIndex: 3 }}
+        style={{
+          position: 'relative',
+          zIndex: 2,
+          maxWidth: '72rem',
+          margin: '0 auto',
+          padding: '48px 32px',
+        }}
       >
         {/* Zone header */}
         <div
-          className="flex items-center mb-6 pb-4"
           style={{
+            display: 'flex',
+            alignItems: 'center',
             gap: '16px',
-            borderBottom: '0.5px solid rgba(255,255,255,0.12)',
+            marginBottom: '24px',
+            paddingBottom: '16px',
+            borderBottom: '0.5px solid rgba(255,255,255,0.1)',
           }}
         >
           <span
-            className="text-xs tracking-widest uppercase whitespace-nowrap"
-            style={{ color: 'rgba(255,255,255,0.3)' }}
+            className="text-xs tracking-widest uppercase"
+            style={{ color: 'rgba(255,255,255,0.3)', whiteSpace: 'nowrap' }}
           >
             {zone.range}
           </span>
-          <div
-            className="flex-1"
-            style={{ height: '0.5px', background: 'rgba(255,255,255,0.08)' }}
-          />
+          <div style={{ flex: 1, height: '0.5px', background: 'rgba(255,255,255,0.08)' }} />
         </div>
 
         {/* Founder grid */}
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+        <div className="founder-grid">
           {founders.map(founder => (
-            <FounderCard key={founder.id} founder={founder} />
+            <FounderCard
+              key={founder.id}
+              founder={founder}
+              expanded={expandedId === founder.id}
+              onToggle={() =>
+                setExpandedId(expandedId === founder.id ? null : founder.id)
+              }
+            />
           ))}
         </div>
       </div>
+
     </div>
   )
 }
