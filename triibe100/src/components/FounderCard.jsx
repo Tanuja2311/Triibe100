@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
-export default function FounderCard({ founder, expanded, onToggle }) {
+export default function FounderCard({ founder }) {
   const ref = useRef(null)
   const [visible, setVisible] = useState(false)
   const [hovered, setHovered] = useState(false)
@@ -25,29 +25,24 @@ export default function FounderCard({ founder, expanded, onToggle }) {
     <div
       ref={ref}
       style={{
-        cursor: 'pointer',
-        borderRadius: '4px',
         opacity: visible ? 1 : 0,
         transform: visible ? 'translateY(0)' : 'translateY(24px)',
         transition: `opacity 400ms cubic-bezier(0.4,0,0.2,1) ${delay}ms, transform 400ms cubic-bezier(0.4,0,0.2,1) ${delay}ms`,
       }}
-      onClick={onToggle}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
 
-      {/* Photo square — hover lift lives here, not on outer div */}
+      {/* Photo */}
       <div
         style={{
           width: '100%',
           aspectRatio: '1/1',
-          background: 'rgba(255,255,255,0.92)',
+          background: 'rgba(255,255,255,0.15)',
           position: 'relative',
           overflow: 'hidden',
-          borderRadius: '4px',
-          transform: hovered ? 'translateY(-6px)' : 'translateY(0)',
-          transition: 'transform 200ms cubic-bezier(0.4,0,0.2,1), box-shadow 200ms cubic-bezier(0.4,0,0.2,1)',
-          boxShadow: hovered ? '0 12px 32px rgba(0,0,0,0.25)' : '0 0px 0px rgba(0,0,0,0)',
+          transform: hovered ? 'translateY(-4px)' : 'translateY(0)',
+          transition: 'transform 200ms ease',
         }}
       >
         <span
@@ -56,28 +51,40 @@ export default function FounderCard({ founder, expanded, onToggle }) {
             top: 0,
             left: 0,
             fontSize: '9px',
-            background: hovered ? 'rgba(0,44,25,0.95)' : 'rgba(0,44,25,0.8)',
-            color: 'rgba(255,255,255,0.9)',
+            background: 'rgba(0,0,0,0.25)',
+            color: 'rgba(255,255,255,0.7)',
             padding: '3px 7px',
             lineHeight: 1.6,
             zIndex: 1,
-            transition: 'background 200ms ease',
           }}
         >
           #{String(founder.id).padStart(2, '0')}
         </span>
 
         {founder.photo ? (
-          <img
-            src={founder.photo}
-            alt={founder.name}
-            style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }}
-          />
+          <>
+            <img
+              src={founder.photo}
+              alt={founder.name}
+              style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }}
+            />
+            <div
+              style={{
+                position: 'absolute',
+                bottom: 0,
+                left: 0,
+                right: 0,
+                height: '40px',
+                background: 'linear-gradient(to bottom, transparent, rgba(0,44,25,0.4))',
+                pointerEvents: 'none',
+              }}
+            />
+          </>
         ) : (
           <svg
             viewBox="0 0 24 24"
             fill="none"
-            stroke="#9ca3af"
+            stroke="#ffffff"
             strokeWidth="1"
             style={{
               width: '52%',
@@ -86,6 +93,7 @@ export default function FounderCard({ founder, expanded, onToggle }) {
               bottom: 0,
               left: '50%',
               transform: 'translateX(-50%)',
+              opacity: 0.3,
             }}
           >
             <circle cx="12" cy="8" r="5" />
@@ -96,13 +104,13 @@ export default function FounderCard({ founder, expanded, onToggle }) {
 
       <p
         style={{
-          fontSize: '11px',
-          fontWeight: 500,
-          color: hovered ? 'rgba(255,255,255,1)' : 'rgba(255,255,255,0.92)',
+          fontSize: '13px',
+          fontWeight: 600,
+          color: '#ffffff',
+          textShadow: '0 1px 4px rgba(0,0,0,0.4)',
           textAlign: 'center',
-          marginTop: '8px',
+          marginTop: '10px',
           lineHeight: 1.3,
-          transition: 'color 200ms ease',
         }}
       >
         {founder.name}
@@ -110,37 +118,30 @@ export default function FounderCard({ founder, expanded, onToggle }) {
 
       <p
         style={{
-          fontSize: '10px',
-          color: 'rgba(255,255,255,0.38)',
+          fontSize: '11px',
+          color: 'rgba(255,255,255,0.75)',
+          textShadow: '0 1px 3px rgba(0,0,0,0.4)',
           textAlign: 'center',
-          marginTop: '2px',
+          marginTop: '3px',
         }}
       >
         {founder.org}
       </p>
 
-      <div
-        style={{
-          maxHeight: expanded ? '100px' : '0px',
-          overflow: 'hidden',
-          opacity: expanded ? 1 : 0,
-          transition: 'max-height 0.4s ease, opacity 0.3s ease',
-        }}
-      >
-        <div
+      {founder.bio && (
+        <p
           style={{
-            marginTop: '8px',
-            paddingTop: '8px',
-            borderTop: '0.5px solid rgba(255,255,255,0.12)',
             fontSize: '10px',
-            color: 'rgba(255,255,255,0.5)',
+            color: 'rgba(255,255,255,0.65)',
+            textShadow: '0 1px 3px rgba(0,0,0,0.3)',
             lineHeight: 1.65,
-            textAlign: 'left',
+            textAlign: 'center',
+            marginTop: '8px',
           }}
         >
           {founder.bio}
-        </div>
-      </div>
+        </p>
+      )}
 
     </div>
   )
