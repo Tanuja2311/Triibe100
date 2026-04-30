@@ -1,8 +1,11 @@
 export default function Intro() {
   return (
     <section
-      className="bg-white"
-      style={{ padding: '64px 0', borderBottom: '0.5px solid #f3f4f6' }}
+      style={{
+        background: '#ffffff',
+        padding: '64px 0',
+        borderBottom: '0.5px solid #f3f4f6',
+      }}
     >
       <div className="max-w-5xl mx-auto px-8 grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
 

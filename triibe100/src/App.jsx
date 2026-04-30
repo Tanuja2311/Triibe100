@@ -1,6 +1,5 @@
-import zones from './data/zones'
-import founders from './data/founders'
-import { useHorizontalDrift } from './hooks/useHorizontalDrift'
+import { zones } from './data/zones'
+import { founders } from './data/founders'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Intro from './components/Intro'
@@ -9,10 +8,8 @@ import FooterCTA from './components/FooterCTA'
 import Footer from './components/Footer'
 
 export default function App() {
-  const { getDriftX } = useHorizontalDrift()
-
   return (
-    <>
+    <div style={{ background: '#002C19' }}>
       <Navbar />
       <Hero />
       <Intro />
@@ -20,12 +17,12 @@ export default function App() {
         <ZoneSection
           key={zone.id}
           zone={zone}
-          founders={founders.filter(f => f.zone === zone.id)}
-          driftX={getDriftX(i)}
+          founders={founders.slice(i * 10, i * 10 + 10)}
+          isFirst={i === 0}
         />
       ))}
       <FooterCTA />
       <Footer />
-    </>
+    </div>
   )
 }

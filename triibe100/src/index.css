@@ -6,26 +6,36 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Zone drift backgrounds: 150% wide on desktop, 200% on mobile */
-.zone-drift-bg {
-  background-size: 150% auto;
-}
-
-@media (max-width: 768px) {
-  .zone-drift-bg {
-    background-size: 200% auto;
-  }
-}
-
-/* Founder grid: 5 cols desktop, 2 cols mobile */
-.founder-grid {
+/* Founder grid per zone */
+.zone-founder-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 16px;
+  gap: 20px;
 }
 
 @media (max-width: 768px) {
-  .founder-grid {
+  .zone-founder-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+}
+
+/* Branch reveal animation */
+@keyframes branchGrow {
+  from {
+    clip-path: inset(0% 0 100% 0);
+    opacity: 0;
+  }
+  to {
+    clip-path: inset(0% 0 0% 0);
+    opacity: 0.12;
+  }
+}
+
+.branch-hidden {
+  opacity: 0;
+  clip-path: inset(0% 0 100% 0);
+}
+
+.branch-revealed {
+  animation: branchGrow 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }

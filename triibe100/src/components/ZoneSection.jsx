@@ -1,69 +1,65 @@
 import { useState } from 'react'
+import { useBranchReveal } from '../hooks/useBranchReveal'
 import FounderCard from './FounderCard'
+import FloatingLeaves from './FloatingLeaves'
 
-export default function ZoneSection({ zone, founders, driftX }) {
+
+export default function ZoneSection({ zone, founders, isFirst }) {
   const [expandedId, setExpandedId] = useState(null)
+  const { ref, revealed } = useBranchReveal()
 
   return (
-    <div id={`zone-${zone.id}`} style={{ position: 'relative' }}>
+    <div
+      ref={ref}
+      style={{
+        position: 'relative',
+        backgroundColor: zone.bg,
+        padding: '48px 32px 56px',
+        marginTop: isFirst ? 0 : '-24px',
+        overflow: 'hidden',
+      }}
+    >
+      <FloatingLeaves />
 
-      {/* Drifting background */}
+      {/* Soft overlap fade */}
       <div
-        className="zone-drift-bg"
         style={{
           position: 'absolute',
-          inset: 0,
+          top: 0,
+          left: 0,
+          right: 0,
+          height: '32px',
+          background: 'linear-gradient(to bottom, rgba(0,0,0,0.12), transparent)',
           zIndex: 0,
-          backgroundImage: `url(${zone.image})`,
-          backgroundPosition: driftX,
-          backgroundRepeat: 'no-repeat',
-          transition: 'background-position 0.1s linear',
-          willChange: 'background-position',
+          pointerEvents: 'none',
         }}
       />
 
-      {/* Dark overlay */}
-      <div
+      {/* Branch decoration */}
+      <img
+        src={zone.branch}
+        alt=""
+        aria-hidden="true"
+        className={revealed ? 'branch-revealed' : 'branch-hidden'}
         style={{
           position: 'absolute',
-          inset: 0,
-          zIndex: 1,
-          background: 'rgba(10, 20, 15, 0.60)',
+          ...(zone.id % 2 !== 0
+            ? { bottom: '-40px', left: '-30px' }
+            : { bottom: '-40px', right: '-30px' }
+          ),
+          width: '280px',
+          height: '360px',
+          objectFit: 'contain',
+          opacity: 0.5,
+          filter: 'brightness(10)',
+          transform: zone.id % 2 !== 0 ? 'none' : 'scaleX(-1)',
+          pointerEvents: 'none',
         }}
       />
 
       {/* Content */}
-      <div
-        style={{
-          position: 'relative',
-          zIndex: 2,
-          maxWidth: '72rem',
-          margin: '0 auto',
-          padding: '48px 32px',
-        }}
-      >
-        {/* Zone header */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '16px',
-            marginBottom: '24px',
-            paddingBottom: '16px',
-            borderBottom: '0.5px solid rgba(255,255,255,0.1)',
-          }}
-        >
-          <span
-            className="text-xs tracking-widest uppercase"
-            style={{ color: 'rgba(255,255,255,0.3)', whiteSpace: 'nowrap' }}
-          >
-            {zone.range}
-          </span>
-          <div style={{ flex: 1, height: '0.5px', background: 'rgba(255,255,255,0.08)' }} />
-        </div>
-
-        {/* Founder grid */}
-        <div className="founder-grid">
+      <div style={{ position: 'relative', zIndex: 1, maxWidth: '72rem', margin: '0 auto' }}>
+        <div className="zone-founder-grid">
           {founders.map(founder => (
             <FounderCard
               key={founder.id}
@@ -76,7 +72,6 @@ export default function ZoneSection({ zone, founders, driftX }) {
           ))}
         </div>
       </div>
-
     </div>
   )
 }
