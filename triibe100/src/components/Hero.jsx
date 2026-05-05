@@ -13,27 +13,33 @@ export default function Hero() {
       />
 
       <div className="relative z-10 max-w-2xl mx-auto px-6">
-        <p
-          className="text-xs tracking-widest uppercase mb-3"
-          style={{ color: '#1B3A2D' }}
+        <h1
+          style={{
+            fontSize: 'clamp(48px, 8vw, 96px)',
+            fontWeight: 600,
+            color: '#002C19',
+            letterSpacing: '-0.02em',
+            lineHeight: 1,
+            marginBottom: '16px',
+          }}
         >
           TRIIBE I00
-        </p>
-
-        <h1 className="text-3xl md:text-5xl font-bold leading-tight" style={{ color: '#111111' }}>
-          Honoring{' '}
-          <span style={{ color: '#002C19' }}>100</span>
-          {' '}next-gen nonprofit founders.
         </h1>
 
         <p
-          className="text-sm leading-relaxed mx-auto mt-3 max-w-sm"
-          style={{ color: '#6b7280' }}
+          style={{
+            fontSize: '16px',
+            color: '#303641',
+            opacity: 0.65,
+            fontWeight: 400,
+            maxWidth: '420px',
+            margin: '0 auto',
+            textAlign: 'center',
+            lineHeight: 1.6,
+          }}
         >
-          A seal of credibility for founders in their 20s building with humility,
-          staying after the meeting, earning the trust of the communities they serve.
+          A definitive list of next-gen nonprofit founders in their 20s to know.
         </p>
-
       </div>
     </section>
   )

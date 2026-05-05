@@ -10,7 +10,7 @@ export default function FloatingLeaves() {
     let leaves = []
     let animId
 
-    const count = 20
+    const count = 45
     const maxSize = 8
     const speed = 2
 

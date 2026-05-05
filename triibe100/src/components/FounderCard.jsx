@@ -28,6 +28,7 @@ export default function FounderCard({ founder }) {
         opacity: visible ? 1 : 0,
         transform: visible ? 'translateY(0)' : 'translateY(24px)',
         transition: `opacity 400ms cubic-bezier(0.4,0,0.2,1) ${delay}ms, transform 400ms cubic-bezier(0.4,0,0.2,1) ${delay}ms`,
+        paddingBottom: '24px',
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -38,68 +39,31 @@ export default function FounderCard({ founder }) {
         style={{
           width: '100%',
           aspectRatio: '1/1',
-          background: 'rgba(255,255,255,0.15)',
+          background: 'rgba(255,255,255,0.08)',
+          borderRadius: '10px',
           position: 'relative',
           overflow: 'hidden',
           transform: hovered ? 'translateY(-4px)' : 'translateY(0)',
           transition: 'transform 200ms ease',
         }}
       >
-        <span
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="rgba(255,255,255,0.3)"
+          strokeWidth="1"
           style={{
+            width: '45%',
+            height: '45%',
             position: 'absolute',
-            top: 0,
-            left: 0,
-            fontSize: '9px',
-            background: 'rgba(0,0,0,0.25)',
-            color: 'rgba(255,255,255,0.7)',
-            padding: '3px 7px',
-            lineHeight: 1.6,
-            zIndex: 1,
+            bottom: 0,
+            left: '50%',
+            transform: 'translateX(-50%)',
           }}
         >
-          #{String(founder.id).padStart(2, '0')}
-        </span>
-
-        {founder.photo ? (
-          <>
-            <img
-              src={founder.photo}
-              alt={founder.name}
-              style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }}
-            />
-            <div
-              style={{
-                position: 'absolute',
-                bottom: 0,
-                left: 0,
-                right: 0,
-                height: '40px',
-                background: 'linear-gradient(to bottom, transparent, rgba(0,44,25,0.4))',
-                pointerEvents: 'none',
-              }}
-            />
-          </>
-        ) : (
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="#ffffff"
-            strokeWidth="1"
-            style={{
-              width: '52%',
-              height: '52%',
-              position: 'absolute',
-              bottom: 0,
-              left: '50%',
-              transform: 'translateX(-50%)',
-              opacity: 0.3,
-            }}
-          >
-            <circle cx="12" cy="8" r="5" />
-            <path d="M2 22c0-5.5 4.5-9 10-9s10 3.5 10 9" />
-          </svg>
-        )}
+          <circle cx="12" cy="8" r="5" />
+          <path d="M2 22c0-5.5 4.5-9 10-9s10 3.5 10 9" />
+        </svg>
       </div>
 
       <p
@@ -137,6 +101,7 @@ export default function FounderCard({ founder }) {
             lineHeight: 1.65,
             textAlign: 'center',
             marginTop: '8px',
+            marginBottom: '32px',
           }}
         >
           {founder.bio}
